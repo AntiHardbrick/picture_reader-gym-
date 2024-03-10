@@ -14,6 +14,8 @@ rgb_array=env.render(mode = 'rgb_array')
 and save this to specific folder
 (file should be named with Unix timestamp to allow viewer to see the picture's generated time)
 ```python
+from PIL import Image
+
 folder_path= "C:\\Users\\woongsan\\Desktop\\temp_folder"
 im = Image.fromarray(rgb_array)
 file_name= f"{datetime.datetime.now().timestamp()}.png"
