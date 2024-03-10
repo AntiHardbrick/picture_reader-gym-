@@ -1,7 +1,7 @@
 # preivew
 ![image](https://github.com/AntiHardbrick/picture_reader-gym-/assets/12881083/f1fa7104-4602-4ebb-bad6-0d160d184419)
 
-(require os: windows)
+(only runnable on Windows os)
 
 if your gym environment keep freezes while render, or want view your simulation more freely, 
 try this viewer!
