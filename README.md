@@ -1,20 +1,13 @@
 # preivew
 ![image](https://github.com/AntiHardbrick/picture_reader-gym-/assets/12881083/f1fa7104-4602-4ebb-bad6-0d160d184419)
 
-(only runnable on Windows os)
+read all PNG files in selected folder, and delete picture after readed.
 
-if your gym environment keep freezes while render, or want view your simulation more freely, 
-try this viewer!
-
-all you need to do is..
-
-render with rgb_array
+require codes:
 ```python
 rgb_array=env.render(mode = 'rgb_array')
 ```
-
-and save this to specific folder
-(file should be named with Unix timestamp to allow viewer to see the picture's generated time)
+(render to picture file)
 ```python
 from PIL import Image
 
@@ -23,13 +16,11 @@ im = Image.fromarray(rgb_array)
 file_name= f"{datetime.datetime.now().timestamp()}.png"
 im.save(os.path.join(folder_path,file_name))
 ```
+(save picture, should naming with unix timestamp, +png extension)
 
-and done! just copy this folder path to viewer's path textbox
-or click 'path' button, and select.
+click button '▶' to play (click again to stop)
 
-lastly click play'▶', and its really done. (click again to stop)
-
-# !!Warning!!
+# Warning
 this viewer will delete all pictures in folder permenently after used.
 make sure to use your selected/empty folder.
-Before click play button, double check your folder path selected correctly
+Recommend to double check selected folder path before play
