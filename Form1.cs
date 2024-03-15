@@ -9,7 +9,7 @@ namespace picture_reader_gym_ {
         bool started = false;
         List<string> file_blacklist;
         List<(Image, string)> usedResource_list;
-
+        int latency = 1000;
         public Form1() {
             InitializeComponent();
         }
@@ -28,12 +28,16 @@ namespace picture_reader_gym_ {
                     footer_status.Text = "check your folder!";
                     return;
                 }
+                button_reset.Enabled = false;
                 footer_status.Text = "running..";
                 started = true;
+                button_execute.Text = "бс";
                 Task.Run(() => main_start());
             }
             else {
+                button_reset.Enabled = true;
                 started = false;
+                button_execute.Text = "в║";
             }
         }
         /// <summary>
@@ -79,7 +83,7 @@ namespace picture_reader_gym_ {
                     //MessageBox.Show($"file:{name_without_frac_builder.ToString()} cur:{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}");
 
                     long file_timestamp = long.Parse(name_without_frac_builder.ToString());
-                    if (file_timestamp + 10000 > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()) {
+                    if (file_timestamp + latency > DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()) {
                         //Thread.Sleep(100);
                         break;
                     }
@@ -167,9 +171,12 @@ namespace picture_reader_gym_ {
                 cur_image.Dispose();
             }
 
+            int total_deleted_filecount = 0;
+
             for (int i = usedResource_list.Count - 1; i >= 0; i--) {
                 usedResource_list[i].Item1.Dispose();
                 File.Delete(usedResource_list[i].Item2);
+                total_deleted_filecount++;
             }
             footer_status.Text = "clear saved array..";
 
@@ -178,6 +185,7 @@ namespace picture_reader_gym_ {
                 string[] files = Directory.GetFiles(used_path);
                 for (int i = 0; i < files.Length; i++) {
                     File.Delete(files[i]);
+                    total_deleted_filecount++;
                 }
                 footer_status.Text = "delete all used-folder's image";
             }
@@ -187,7 +195,15 @@ namespace picture_reader_gym_ {
                 status_text = "running";
             else
                 status_text = "not-running";
-            footer_status.Text = $"[{status_text}] file blacklist cleared!(total: {total_blacklist})";
+            footer_status.Text = $"[{status_text}]/used resources deleted[{total_deleted_filecount}]/file blacklist cleared!(total: {total_blacklist})";
+        }
+
+        private void button_setting_click(object sender, EventArgs e) {
+            Form_setting setting = new Form_setting(latency);
+            setting.ShowDialog();
+            if(setting.DialogResult == DialogResult.OK) {
+                latency = setting.GetSetting_latency();
+            }
         }
     }
 }

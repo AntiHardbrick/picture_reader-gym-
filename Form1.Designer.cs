@@ -26,8 +26,7 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             picturebox_main = new PictureBox();
             textedit_path = new TextBox();
             button_search = new Button();
@@ -35,6 +34,7 @@
             statusStrip1 = new StatusStrip();
             footer_status = new ToolStripStatusLabel();
             button_reset = new Button();
+            button_setting = new Button();
             ((System.ComponentModel.ISupportInitialize)picturebox_main).BeginInit();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -55,7 +55,7 @@
             textedit_path.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             textedit_path.Location = new Point(104, 326);
             textedit_path.Name = "textedit_path";
-            textedit_path.Size = new Size(332, 23);
+            textedit_path.Size = new Size(301, 23);
             textedit_path.TabIndex = 1;
             // 
             // button_search
@@ -107,12 +107,24 @@
             button_reset.UseVisualStyleBackColor = true;
             button_reset.Click += button_reset_Click;
             // 
+            // button_setting
+            // 
+            button_setting.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button_setting.Location = new Point(411, 325);
+            button_setting.Name = "button_setting";
+            button_setting.Size = new Size(25, 23);
+            button_setting.TabIndex = 6;
+            button_setting.Text = "⚙";
+            button_setting.UseVisualStyleBackColor = true;
+            button_setting.Click += button_setting_click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(496, 374);
+            Controls.Add(button_setting);
             Controls.Add(button_reset);
             Controls.Add(statusStrip1);
             Controls.Add(button_execute);
@@ -139,5 +151,6 @@
         private ToolStripStatusLabel footer_status;
         private Button button1;
         private Button button_reset;
+        private Button button_setting;
     }
 }
